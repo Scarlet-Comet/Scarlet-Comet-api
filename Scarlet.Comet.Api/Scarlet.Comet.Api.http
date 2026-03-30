@@ -1,0 +1,6 @@
+@Scarlet.Comet.Api_HostAddress = http://localhost:5104
+
+GET {{Scarlet.Comet.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

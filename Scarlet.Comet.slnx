@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Scarlet.Comet.Api/Scarlet.Comet.Api.csproj" />
+  <Project Path="Scarlet.Comet.Data/Scarlet.Comet.Data.csproj" />
+  <Project Path="Scarlet.Comet.Domain/Scarlet.Comet.Domain.csproj" />
+</Solution>
