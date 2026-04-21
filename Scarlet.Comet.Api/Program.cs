@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Scarlet.Comet.Data;
 
@@ -14,6 +15,22 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = builder.Configuration["Auth0:Authority"];
+    options.Audience = builder.Configuration["Auth0:Audience"];
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("delete:catalog", policy =>
+        policy.RequireClaim("permissions", "delete:catalog"));
 });
 
 builder.Services.AddEndpointsApiExplorer();
@@ -34,6 +51,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
 
 app.MapControllers();
 
