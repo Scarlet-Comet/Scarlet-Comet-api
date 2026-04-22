@@ -36,8 +36,10 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("StoreConnection");
+
 builder.Services.AddDbContext<StoreContext>(options =>
-    options.UseSqlite("Data Source=Store.db"));
+    options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
