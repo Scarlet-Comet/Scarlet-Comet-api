@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Scarlet.Comet.Data;
@@ -78,7 +79,8 @@ public class CatalogController : ControllerBase
         return NoContent();
     }
 
-    [HttpDelete("{id:int}")]
+   [HttpDelete("{id:int}")]
+[Authorize("delete:catalog")]
 public ActionResult DeleteItem(int id)
 {
     var item = _context.Items
